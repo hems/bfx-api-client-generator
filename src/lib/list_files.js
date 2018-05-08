@@ -13,10 +13,11 @@ module.exports = async function list (folder, fileList = []) {
 
   await P.map(files, async (file) => {
     if ((await stat(folder + file)).isDirectory()) {
-      fileList = list(folder + file + '/', fileList)
-    } else {
-      fileList.push(folder + file)
+      fileList = await list(folder + file, fileList)
+      return fileList
     }
+
+    fileList.push(folder + file)
   })
 
   return fileList
