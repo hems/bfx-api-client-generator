@@ -1,3 +1,6 @@
+/*
+ * Renders a given handlebar template using given data
+ */
 const handlebars = require('handlebars')
 const read = require('./read')
 

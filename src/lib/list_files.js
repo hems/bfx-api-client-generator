@@ -1,7 +1,6 @@
 /**
  * List all files in a folder recursively
  */
-
 const P = require('bluebird')
 const fs = require('fs')
 const readdir = P.promisify(fs.readdir)

@@ -1,3 +1,6 @@
+/*
+ * Writes given content into specified file
+ */
 const P = require('bluebird')
 const fs = require('fs')
 const path = require('path')

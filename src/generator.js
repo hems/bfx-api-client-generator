@@ -3,26 +3,35 @@ const path = require('path')
 const mkdirp = P.promisify(require('mkdirp'))
 
 const ls = require('./lib/list_files')
-const render = require('./lib/render')
-const write = require('./lib/write')
+const fork = require('./lib/fork_job')
+const os = require('os')
 
 module.exports = async (data, templatePath, outputPath) => {
   // normalize the path
   templatePath = path.resolve(templatePath)
   outputPath = path.resolve(outputPath)
 
-  // grab a list of all files on a give path
-  const files = await ls(templatePath)
-
   // create output folder if needed
   await mkdirp(outputPath)
 
+  // generate a list of all files in this template folder
+  const files = await ls(templatePath)
+
+  // create one worker for each file
   await P.map(files, async (file) => {
     const id = file.replace(templatePath, '')
 
-    const content = await render(file, data)
+    const job = {
+      file: file,
+      data: data,
+      outputPath: outputPath + id
+    }
 
-    // write the file on the outut folder
-    await write(outputPath + id, content)
-  })
+    const worker = path.join(__dirname, '/worker.js')
+
+    // send the job away
+    await fork(worker, job)
+
+  // use as many cpus as possible
+  }, {concurrency: os.cpus().length})
 }
