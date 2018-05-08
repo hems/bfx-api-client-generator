@@ -1,0 +1,29 @@
+{
+  "name": "bfx-generator",
+  "version": "1.0.0",
+  "main": "src/generator.js",
+  "author": "hems <hems.inlet@gmail.com>",
+  "standard": {
+    "ignore": [
+      "/examples"
+    ]
+  },
+  "scripts": {
+    "test": "mocha ./tests/index.js",
+    "test:watch": "mocha ./tests/index.js --watch ./",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "handlebars": "^4.0.11"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "clear-require": "^2.0.0",
+    "mocha": "^5.1.1",
+    "rimraf": "^2.6.2",
+    "standard": "^11.0.1"
+  }
+}
