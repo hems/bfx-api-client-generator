@@ -1,8 +1,9 @@
 {
-  "name": "bfx-generator",
-  "version": "1.0.0",
+  "name": "bfx-api-client-generator",
+  "version": "0.0.1",
   "main": "src/generator.js",
   "author": "hems <hems.inlet@gmail.com>",
+  "contributors":[],
   "standard": {
     "ignore": [
       "/examples"

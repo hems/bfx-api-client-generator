@@ -18,8 +18,6 @@ module.exports = async (data, templatePath, outputPath) => {
   await mkdirp(outputPath)
 
   await P.map(files, async (file) => {
-    // console.log('file ->', file)
-
     const id = file.replace(templatePath, '')
 
     const content = await render(file, data)

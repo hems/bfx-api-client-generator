@@ -2,7 +2,9 @@
 
 ## ~ bfx-client-generator
 
-The Bitfinex client generator is a multi purpose template rendering machine
+The Bitfinex client generator is a multi purpose template rendering machine,
+it's built with the goal of generating bitfinex api clients for multiple
+programming languages
 
 ### ~ usage
 
