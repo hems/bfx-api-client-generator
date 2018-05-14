@@ -17,7 +17,7 @@ module.exports = (worker, job) => {
     if (code === 0) return deferred.resolve()
 
     // something went wrong!
-    if (code !== 0) return deferred.reject(code)
+    deferred.reject(code)
   })
 
   return deferred.promise
