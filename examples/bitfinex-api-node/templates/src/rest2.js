@@ -1,3 +1,38 @@
+{{#*inline "auth_request"}}
+  /**
+   * @param {string[]} keys
+   * @param {Method} cb
+   * @return {Promise} p
+   */
+  {{name}} ({{param}}, cb) {
+    return this._makeAuthRequest(`/auth/r/{{http_path}}`, { {{param}} }, cb)
+  }
+{{/inline}}
+
+{{#*inline "auth_request_no_params"}}
+  /**
+   * @param {Method} cb
+   * @return {Promise} p
+   * @see {{doc.REFERENCE}}
+   */
+  {{name}} (cb) {
+    return this._makeAuthRequest('/auth/r/{{http_path}}', {}, cb, {{transformer}})
+  }
+{{/inline}}
+
+{{#*inline "public_legacy"}}
+  /**{{#if doc.description}}
+   * {{doc.description}}{{/if}}
+   *
+   * @param {Method?} cb - legacy callback
+   * @return {Promise} p
+   * @deprecated
+   * @see {{doc.REFERENCE}}
+   */
+  {{name}} (cb = () => {}) {
+    return this._makePublicLegacyRequest('{{http_path}}', cb)
+  }
+{{/inline}}
 'use strict'
 
 const rp = require('request-promise')
@@ -5,25 +40,11 @@ const { URLSearchParams } = require('url')
 
 const RESTv1 = require('./rest')
 const { genAuthSig, nonce, isClass } = require('../util')
-const {
-  FundingCredit,
-  FundingLoan,
-  FundingOffer,
-  FundingTrade,
-  MarginInfo,
-  Order,
-  Position,
-  Trade,
-  PublicTrade,
-  TradingTicker,
-  FundingTicker,
-  Wallet,
-  Alert,
-  Candle
-} = require('../models')
+const { {{#each functions}}{{#if transformer}}
+{{transformer}},{{/if}}{{/each}} } = require('../models')
 
-const BASE_TIMEOUT = 15000
-const API_URL = 'https://api.bitfinex.com'
+const BASE_TIMEOUT = {{BASE_TIMEOUT}}
+const API_URL = {{API_URL}}
 
 /**
  * Communicates with v2 of the Bitfinex HTTP API
@@ -100,7 +121,7 @@ class RESTv2 {
       return res
     }).catch((err) => {
       if (err.error && err.error[1] === 10114) {
-        err.message += ' see https://github.com/bitfinexcom/bitfinex-api-node/blob/master/README.md#nonce-too-small for help'
+        err.message += ' see {{GITHUB_URL}}/blob/master/README.md#nonce-too-small for help'
       }
 
       cb(new Error(err))
@@ -395,23 +416,10 @@ class RESTv2 {
     }, cb, Trade)
   }
 
-  /**
-   * @param {Method} cb
-   * @return {Promise} p
-   * @see https://docs.bitfinex.com/v2/reference#rest-auth-wallets
-   */
-  wallets (cb) {
-    return this._makeAuthRequest('/auth/r/wallets', {}, cb, Wallet)
-  }
+  {{#each functions}}
+{{> (lookup . 'partial')}}
 
-  /**
-   * @param {Method} cb
-   * @return {Promise} p
-   * @see https://docs.bitfinex.com/v2/reference#rest-auth-orders
-   */
-  activeOrders (cb) {
-    return this._makeAuthRequest('/auth/r/orders', {}, cb, Order)
-  }
+  {{/each}}
 
   /**
    * @param {string} symbol
@@ -442,15 +450,6 @@ class RESTv2 {
     return this._makeAuthRequest(`/auth/r/order/${symbol}:${orderID}/trades`, {
       start, end, limit
     }, cb, Trade)
-  }
-
-  /**
-   * @param {Method} cb
-   * @return {Promise} p
-   * @see https://docs.bitfinex.com/v2/reference#rest-auth-positions
-   */
-  positions (cb) {
-    return this._makeAuthRequest('/auth/r/positions', {}, cb, Position)
   }
 
   /**
@@ -564,15 +563,6 @@ class RESTv2 {
   }
 
   /**
-   * @param {Method} cb
-   * @return {Promise} p
-   * @see https://docs.bitfinex.com/v2/reference#rest-auth-performance
-   */
-  performance (cb) {
-    return this._makeAuthRequest('/auth/r/stats/perf:1D/hist', {}, cb)
-  }
-
-  /**
    * @param {string} symbol
    * @param {string} dir
    * @param {number} rate
@@ -588,67 +578,6 @@ class RESTv2 {
       rate,
       type
     }, cb)
-  }
-
-  /**
-   * Get a list of valid symbol names
-   *
-   * @param {Method?} cb - legacy callback
-   * @return {Promise} p
-   * @deprecated
-   * @see https://docs.bitfinex.com/v1/reference#rest-public-symbols
-   */
-  symbols (cb = () => {}) {
-    return this._makePublicLegacyRequest('symbols', cb)
-  }
-
-  /**
-   * Get a list of valid symbol names and details
-   *
-   * @param {Method} cb
-   * @return {Promise} p
-   * @deprecated
-   * @see https://docs.bitfinex.com/v1/reference#rest-public-symbol-details
-   */
-  symbolDetails (cb) {
-    return this._makePublicLegacyRequest('symbols_details', cb)
-  }
-
-  /**
-   * Request information about your account
-   *
-   * @param {Method} cb
-   * @return {Promise} p
-   * @deprecated
-   * @see https://docs.bitfinex.com/v1/reference#rest-auth-account-info
-   */
-  accountInfo (cb) {
-    return this._makeAuthLegacyRequest('account_infos', {}, cb)
-  }
-
-  /**
-   * Request account withdrawl fees
-   *
-   * @param {Method} cb
-   * @return {Promise} p
-   * @deprecated
-   * @see https://docs.bitfinex.com/v1/reference#rest-auth-fees
-   */
-  accountFees (cb) {
-    return this._makeAuthLegacyRequest('account_fees', {}, cb)
-  }
-
-  /**
-   * Returns a 30-day summary of your trading volume and return on margin
-   * funding.
-   *
-   * @param {Method} cb
-   * @return {Promise} p
-   * @deprecated
-   * @see https://docs.bitfinex.com/v1/reference#rest-auth-summary
-   */
-  accountSummary (cb) {
-    return this._makeAuthLegacyRequest('summary', {}, cb)
   }
 
   /**

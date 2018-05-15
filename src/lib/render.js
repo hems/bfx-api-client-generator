@@ -11,8 +11,8 @@ module.exports = async (templatePath, data = {}) => {
   // register before each compilation because of the multi-thread compilation
   // if there was no multi thread ( fork_child ) compilation we could
   // be able to load all the partials once directly from the data.js file
-  if(data.partials){
-    Object.keys(data.partials).forEach( (key)=>{
+  if (data.partials) {
+    Object.keys(data.partials).forEach((key) => {
       handlebars.registerPartial(key, data.partials[key])
     })
   }
