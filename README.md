@@ -45,26 +45,8 @@ business()
 ### ~ partials
 
 There are two examples:
- - [inline partials]('./examples/handlebars-inline-partials')
- - [external files as partials]('./examples/handlebars-partials')
-
-
-```javascript
-const generate = require('bfx-client-generator')
-
-const data     = require('./data-as-object/data.js')
-const template = './data-as-object/templates'
-const output   = './data-as-object/output'
-
-async function business () {
-  // await the machine to do it's thing
-  await generate(data, template, output)
-
-  console.log(' - OK')
-}
-
-business()
-```
+ - [inline partials](./examples/handlebars-inline-partials)
+ - [external files as partials](./examples/handlebars-partials)
 
 ### ~ development
 

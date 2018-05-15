@@ -5,17 +5,15 @@ const read       = require('../../src/lib/read')
 
 module.exports = async function(){
 
-  // load all partials from partials folder
+  // load all partials from partials folder as strings
   var partial_files = await ls(__dirname + '/partials')
   var partials      = {}
 
-  // compile all partials
-  await P.map(partial_files, async (file) =>{
+  await P.map(partial_files, async (file) => {
     const content = await read(file)
 
-    // remove the path from the partial file
-    var id = file.replace(__dirname + '/partials/', '')
-    id = id.replace('.hbs', '')
+    // extract partial id from filename
+    var id = file.replace(__dirname + '/partials/', '').replace('.hbs', '')
 
     partials[id] = content
   })
