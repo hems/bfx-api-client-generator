@@ -6,7 +6,14 @@ The Bitfinex client generator is a multi purpose template rendering machine,
 it's built with the goal of generating bitfinex api clients for multiple
 programming languages
 
-### ~ usage
+### ~ installing
+
+````shell
+git clone
+npm install
+````
+
+### ~ basic example
 
  - Prepare a [template folder](./examples/node-test/template) with [handlebars templates](https://github.com/wycats/handlebars.js)
  - Prepare some [data](./examples/node-test/data.js)
@@ -35,12 +42,29 @@ business()
 
  - Find [the example file](./examples/example.js) on the [examples folder](./examples)
 
-### ~ installing
+### ~ partials
 
-````shell
-git clone
-npm install
-````
+There are two examples:
+ - [inline partials]('./examples/handlebars-inline-partials')
+ - [external files as partials]('./examples/handlebars-partials')
+
+
+```javascript
+const generate = require('bfx-client-generator')
+
+const data     = require('./data-as-object/data.js')
+const template = './data-as-object/templates'
+const output   = './data-as-object/output'
+
+async function business () {
+  // await the machine to do it's thing
+  await generate(data, template, output)
+
+  console.log(' - OK')
+}
+
+business()
+```
 
 ### ~ development
 
