@@ -1,8 +1,8 @@
 const generate = require('../src/generator')
 
-const data     = require('./node-test/data.js')
-const template = './node-test/template'
-const output   = './output/node-test'
+const data     = require('./data-as-object/data.js')
+const template = './data-as-object/templates'
+const output   = './data-as-object/output'
 
 async function business () {
   // await the machine to do it's thing

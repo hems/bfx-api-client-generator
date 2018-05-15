@@ -2,4 +2,6 @@
 node_modules
 package-lock.json
 yarn-error.log
-examples/simple-test/output
+examples/data-as-object/output
+examples/data-as-function/output
+examples/data-as-promise/output

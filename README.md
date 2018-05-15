@@ -16,15 +16,15 @@ programming languages
 ```javascript
 const generate = require('bfx-client-generator')
 
-const data     = require('./node-test/data.js')
-const template = './node-test/template'
-const output   = './output/node-test'
+const data     = require('./data-as-object/data.js')
+const template = './data-as-object/templates'
+const output   = './data-as-object/output'
 
-async function business() {
+async function business () {
   // await the machine to do it's thing
   await generate(data, template, output)
 
-  console.log(" - OK")
+  console.log(' - OK')
 }
 
 business()

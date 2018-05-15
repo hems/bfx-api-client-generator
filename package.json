@@ -11,7 +11,7 @@
   },
   "scripts": {
     "test": "mocha ./tests/index.js",
-    "test:watch": "mocha ./tests/index.js --watch ./",
+    "test:watch": "mocha ./tests/index.js --watch ./src/",
     "lint": "standard",
     "lint:fix": "standard --fix"
   },

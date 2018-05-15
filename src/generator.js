@@ -11,6 +11,12 @@ module.exports = async (data, templatePath, outputPath) => {
   templatePath = path.resolve(templatePath)
   outputPath = path.resolve(outputPath)
 
+  // accept data as a function
+  if (typeof data === 'function') data = data()
+
+  // accept data as a promise or a function that returns a promise
+  if (data instanceof Promise) data = await data
+
   // create output folder if needed
   await mkdirp(outputPath)
 
