@@ -10,32 +10,6 @@ const read = require('../src/lib/read')
 
 const EXAMPLES_PATH = path.join(__dirname, '/../examples/')
 
-describe('~ bitfinex libraries', () => {
-  it('bitfinex-api-node', async () => {
-    const input = require(EXAMPLES_PATH + 'bitfinex-api-node/data.js')
-
-    const templatePath = path.join(EXAMPLES_PATH, 'bitfinex-api-node/templates')
-
-    // delete folder if exists
-    await deleteFolder(path.join(EXAMPLES_PATH, 'bitfinex-api-node/output'))
-
-    const outputPath = path.join(EXAMPLES_PATH, 'bitfinex-api-node/output')
-
-    await generator(input, templatePath, outputPath)
-
-    // test if we can read the readme file
-    const readme = await read(path.join(EXAMPLES_PATH, 'bitfinex-api-node/output/readme.md'))
-
-    assert.ok(readme)
-
-    // test if we can read index.js file
-    const rest2 = await read(path.join(EXAMPLES_PATH, 'bitfinex-api-node/output/src/rest2.js'))
-
-    // TODO: better testing regarding this generation
-    assert.equal(rest2.indexOf('{{'), -1)
-  })
-})
-
 describe('~ possible data inputs', () => {
   it('render data-as-object template', async () => {
     const input = require(EXAMPLES_PATH + 'data-as-object/data.js')
@@ -58,24 +32,6 @@ describe('~ possible data inputs', () => {
     const indexjs = await read(path.join(EXAMPLES_PATH, 'data-as-object/output/src/index.js'))
 
     assert.equal(indexjs, input.SOME_DATA)
-  })
-
-  it('render data-as-function template', async () => {
-    const input = require(EXAMPLES_PATH + 'data-as-function/data.js')
-
-    const templatePath = path.join(EXAMPLES_PATH, 'data-as-function/templates')
-
-    // delete folder if exists
-    await deleteFolder(path.join(EXAMPLES_PATH, 'data-as-function/output'))
-
-    const outputPath = path.join(EXAMPLES_PATH, 'data-as-function/output')
-
-    await generator(input, templatePath, outputPath)
-
-    // test if we can read the readme file
-    const readme = await read(path.join(EXAMPLES_PATH, 'data-as-function/output/random.md'))
-
-    assert.ok(!isNaN(parseFloat(readme)))
   })
 
   it('render data-as-promise template', async () => {
@@ -131,8 +87,34 @@ describe('~ handlebars partials', () => {
     // test if we can read the readme file
     const balances = await read(path.join(EXAMPLES_PATH, 'handlebars-partials/output/balances.md'))
 
-    const awaited = await data()
+    const awaited = await data
 
     assert.equal(balances.split('\n').length, awaited.balances.length + 1)
+  })
+})
+
+describe('~ bitfinex libraries', () => {
+  it('compile all clients', async () => {
+    const input = require(EXAMPLES_PATH + 'bitfinex-clients/data.js')
+
+    const templatePath = path.join(EXAMPLES_PATH, 'bitfinex-clients/templates')
+
+    // delete folder if exists
+    await deleteFolder(path.join(EXAMPLES_PATH, 'bitfinex-clients/output'))
+
+    const outputPath = path.join(EXAMPLES_PATH, 'bitfinex-clients/output')
+
+    await generator(input, templatePath, outputPath)
+
+    // test if we can read the readme file
+    const readme = await read(path.join(EXAMPLES_PATH, 'bitfinex-clients/output/node/README.md'))
+
+    assert.ok(readme)
+
+    // test if we can read index.js file
+    const rest2 = await read(path.join(EXAMPLES_PATH, 'bitfinex-clients/output/node/lib/transports/rest2.js'))
+
+    // TODO: better testing regarding this generation
+    assert.equal(rest2.indexOf('{{'), -1)
   })
 })

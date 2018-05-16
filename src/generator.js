@@ -1,20 +1,17 @@
 const P = require('bluebird')
 const path = require('path')
 const mkdirp = P.promisify(require('mkdirp'))
-
 const ls = require('./lib/list_files')
-const fork = require('./lib/fork_job')
-const os = require('os')
+
+const render = require('./lib/render')
+const write = require('./lib/write')
 
 module.exports = async (data, templatePath, outputPath) => {
   // normalize the path
   templatePath = path.resolve(templatePath)
   outputPath = path.resolve(outputPath)
 
-  // accept data as a function
-  if (typeof data === 'function') data = data()
-
-  // accept data as a promise or a function that returns a promise
+  // accept data as a promise or a function
   if (data instanceof Promise) data = await data
 
   // create output folder if needed
@@ -27,17 +24,10 @@ module.exports = async (data, templatePath, outputPath) => {
   await P.map(files, async (file) => {
     const id = file.replace(templatePath, '')
 
-    const job = {
-      file: file,
-      data: data,
-      outputPath: outputPath + id
-    }
+    // renders the content of the file
+    const content = await render(file, data)
 
-    const worker = path.join(__dirname, '/worker.js')
-
-    // send the job away
-    await fork(worker, job)
-
-  // use as many cpus as possible
-  }, {concurrency: os.cpus().length})
+    // write the file on the outut folder
+    await write(outputPath + id, content)
+  })
 }
