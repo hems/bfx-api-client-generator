@@ -1,21 +1,10 @@
-const P          = require('bluebird')
-const handlebars = require('handlebars')
-const ls         = require('../../src/lib/list_files')
-const read       = require('../../src/lib/read')
+const P             = require('bluebird')
+const handlebars    = require('handlebars')
+const load_partials = require('../../src/lib/load_partials')
 
 module.exports = new Promise(async (resolve) => {
 
-  // load all partials from partials folder as strings
-  var partial_files = await ls(__dirname + '/partials')
-
-  await P.map(partial_files, async (file) => {
-    const content = await read(file)
-
-    // extract partial id from filename
-    var id = file.replace(__dirname + '/partials/', '').replace('.hbs', '')
-
-    handlebars.registerPartial(id, content)
-  })
+  await load_partials(__dirname + '/partials')
 
   resolve({
     balances: [

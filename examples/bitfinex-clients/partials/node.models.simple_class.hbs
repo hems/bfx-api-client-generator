@@ -1,0 +1,9 @@
+class {{pascal_case __FILENAME__}} extends Model {
+  constructor (data = {}) {
+    super(data, FIELDS, BOOL_FIELDS, FIELD_KEYS)
+  }
+
+  static unserialize (arr) {
+    return super.unserialize(arr, FIELDS, BOOL_FIELDS, FIELD_KEYS)
+  }
+}

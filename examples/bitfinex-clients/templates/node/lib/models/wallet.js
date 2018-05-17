@@ -1,32 +1,15 @@
 'use strict'
 
 const Model = require('../model')
-const BOOL_FIELDS = []
-const FIELDS = {
-  type: 0,
-  currency: 1,
-  balance: 2,
-  unsettledInterest: 3,
-  balanceAvailable: 4
-}
+{{> node.models.fields (lookup node.models __FILENAME__) }}
 
-const FIELD_KEYS = Object.keys(FIELDS)
+{{> node.models.simple_class this }}
 
-class Wallet extends Model {
-  constructor (data = {}) {
-    super(data, FIELDS, BOOL_FIELDS, FIELD_KEYS)
-  }
-
-  static unserialize (arr) {
-    return super.unserialize(arr, FIELDS, BOOL_FIELDS, FIELD_KEYS)
-  }
-}
-
-Wallet.type = {}
+{{pascal_case __FILENAME__}}.type = {}
 const types = ['exchange', 'margin', 'funding']
 
 types.forEach((t) => {
-  Wallet.type[t.toUpperCase()] = t
+  {{pascal_case __FILENAME__}}.type[t.toUpperCase()] = t
 })
 
-module.exports = Wallet
+module.exports = {{pascal_case __FILENAME__}}

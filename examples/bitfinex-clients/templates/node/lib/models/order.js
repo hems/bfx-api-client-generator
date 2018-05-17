@@ -3,29 +3,7 @@
 const Promise = require('bluebird')
 const Model = require('../model')
 const { prepareAmount, preparePrice } = require('../util/precision')
-const BOOL_FIELDS = ['notify']
-const FIELDS = {
-  id: 0,
-  gid: 1,
-  cid: 2,
-  symbol: 3,
-  mtsCreate: 4,
-  mtsUpdate: 5,
-  amount: 6,
-  amountOrig: 7,
-  type: 8,
-  typePrev: 9,
-  flags: 12,
-  status: 13,
-  price: 16,
-  priceAvg: 17,
-  priceTrailing: 18,
-  priceAuxLimit: 19,
-  notify: 23,
-  placedId: 25
-}
-
-const FIELD_KEYS = Object.keys(FIELDS)
+{{> node.models.fields (lookup node.models __FILENAME__) }}
 
 let lastCID = Date.now()
 

@@ -1,102 +1,116 @@
-module.exports = {
+const load_partials = require('../../src/lib/load_partials')
+const load_helpers  = require('../../src/lib/load_helpers')
 
-  GITHUB_URL: 'https://github.com/bitfinexcom/bitfinex-api-node/',
+module.exports = new Promise(async (resolve) => {
 
-  API_URL: 'https://api.bitfinex.com',
+  await load_partials(__dirname + "/partials")
 
-  BASE_TIMEOUT: 15000,
+  await load_helpers(__dirname + "/helpers")
 
-  functions: [{
-    partial: 'auth_request_no_params',
+  resolve({
+    GITHUB_URL: 'https://github.com/bitfinexcom/bitfinex-api-node/',
 
-    name: 'wallets',
-    http_path: 'wallets',
-    transformer: 'Wallet',
+    API_URL: 'https://api.bitfinex.com',
 
-    doc: {
-      REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-wallets'
-    }
-  },{
-    partial: 'auth_request_no_params',
+    BASE_TIMEOUT: 15000,
 
-    name: 'positions',
-    http_path: 'positions',
-    transformer: 'Position',
+    node: { 
+      models: require('./node.models') 
+    },
 
-    doc: {
-      REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-wallets'
-    }
-  },{
-    partial: 'auth_request_no_params',
+    functions: [{
+      partial: 'auth_request_no_params',
 
-    name: 'performance',
-    http_path: 'stats/perf:1D/hist',
-    transformer: 'Position',
+      name: 'wallets',
+      http_path: 'wallets',
+      transformer: 'Wallet',
 
-    doc: {
-      REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-wallets'
-    }
-  },{
-    partial: 'auth_request_no_params',
+      doc: {
+        REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-wallets'
+      }
+    },{
+      partial: 'auth_request_no_params',
 
-    name: 'activeOrders',
-    http_path: 'orders',
-    transformer: 'Order',
+      name: 'positions',
+      http_path: 'positions',
+      transformer: 'Position',
 
-    doc: {
-      REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-orders'
-    }
-  },{
-    partial: 'public_legacy',
+      doc: {
+        REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-wallets'
+      }
+    },{
+      partial: 'auth_request_no_params',
 
-    name: 'symbols',
-    http_path: 'symbols',
+      name: 'performance',
+      http_path: 'stats/perf:1D/hist',
+      transformer: 'Position',
 
-    doc: {
-      description: 'Get a list of valid symbol names',
-      REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
-    }
-  },{
-    partial: 'public_legacy',
+      doc: {
+        REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-wallets'
+      }
+    },{
+      partial: 'auth_request_no_params',
 
-    name: 'symbolsDetails',
-    http_path: 'symbols_details',
+      name: 'activeOrders',
+      http_path: 'orders',
+      transformer: 'Order',
 
-    doc: {
-      description: 'Get a list of valid symbol names and details',
-      REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
-    }
-  },{
-    partial: 'public_legacy',
+      doc: {
+        REFERENCE: 'https://docs.bitfinex.com/v2/reference#rest-auth-orders'
+      }
+    },{
+      partial: 'public_legacy',
 
-    name: 'accountInfo',
-    http_path: 'account_infos',
+      name: 'symbols',
+      http_path: 'symbols',
 
-    doc: {
-      description: 'Request information about your account',
-      REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
-    }
-  },{
-    partial: 'public_legacy',
+      doc: {
+        description: 'Get a list of valid symbol names',
+        REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
+      }
+    },{
+      partial: 'public_legacy',
 
-    name: 'accountFees',
-    http_path: 'account_fees',
+      name: 'symbolsDetails',
+      http_path: 'symbols_details',
 
-    doc: {
-      description: 'Request account withdrawl fees',
-      REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
-    }
-  },{
-    partial: 'public_legacy',
+      doc: {
+        description: 'Get a list of valid symbol names and details',
+        REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
+      }
+    },{
+      partial: 'public_legacy',
 
-    name: 'accountSummary',
-    http_path: 'summary',
+      name: 'accountInfo',
+      http_path: 'account_infos',
 
-    doc: {
-      description: `Returns a 30-day summary of your trading volume and return on margin
-   * funding.`,
-      REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
-    }
-  }]
+      doc: {
+        description: 'Request information about your account',
+        REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
+      }
+    },{
+      partial: 'public_legacy',
 
-}
+      name: 'accountFees',
+      http_path: 'account_fees',
+
+      doc: {
+        description: 'Request account withdrawl fees',
+        REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
+      }
+    },{
+      partial: 'public_legacy',
+
+      name: 'accountSummary',
+      http_path: 'summary',
+
+      doc: {
+        description: `Returns a 30-day summary of your trading volume and return on margin
+     * funding.`,
+        REFERENCE: 'https://docs.bitfinex.com/v1/reference#rest-public-symbols'
+      }
+    }]
+
+  })
+
+});

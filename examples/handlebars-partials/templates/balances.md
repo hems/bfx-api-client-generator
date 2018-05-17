@@ -1,3 +1,3 @@
 {{#each balances}}
-  {{> print_balance}}
+{{> print_balance}}
 {{/each}}

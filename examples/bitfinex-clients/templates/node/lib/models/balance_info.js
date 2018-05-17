@@ -1,22 +1,8 @@
 'use strict'
 
 const Model = require('../model')
-const BOOL_FIELDS = []
-const FIELDS = {
-  amount: 0,
-  amountNet: 1
-}
+{{> node.models.fields (lookup node.models __FILENAME__) }}
 
-const FIELD_KEYS = Object.keys(FIELDS)
+{{> node.models.simple_class this }}
 
-class BalanceInfo extends Model {
-  constructor (data = {}) {
-    super(data, FIELDS, BOOL_FIELDS, FIELD_KEYS)
-  }
-
-  static unserialize (arr) {
-    return super.unserialize(arr, FIELDS, BOOL_FIELDS, FIELD_KEYS)
-  }
-}
-
-module.exports = BalanceInfo
+module.exports = {{pascal_case __FILENAME__}}

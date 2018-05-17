@@ -10,6 +10,34 @@ const read = require('../src/lib/read')
 
 const EXAMPLES_PATH = path.join(__dirname, '/../examples/')
 
+describe('~ bitfinex libraries', () => {
+  it('compile all clients', async () => {
+    const input = require(EXAMPLES_PATH + 'bitfinex-clients/data.js')
+
+    const templatePath = path.join(EXAMPLES_PATH, 'bitfinex-clients/templates')
+
+    // delete folder if exists
+    await deleteFolder(path.join(EXAMPLES_PATH, 'bitfinex-clients/output'))
+
+    const outputPath = path.join(EXAMPLES_PATH, 'bitfinex-clients/output')
+
+    await generator(input, templatePath, outputPath)
+
+    // test if we can read the readme file
+    const readme = await read(path.join(EXAMPLES_PATH, 'bitfinex-clients/output/node/README.md'))
+
+    assert.ok(readme)
+
+    // test if we can read index.js file
+    const rest2 = await read(path.join(EXAMPLES_PATH, 'bitfinex-clients/output/node/lib/transports/rest2.js'))
+
+    // TODO: better testing regarding this generation
+    assert.equal(rest2.indexOf('{{'), -1)
+  })
+})
+
+return
+
 describe('~ possible data inputs', () => {
   it('render data-as-object template', async () => {
     const input = require(EXAMPLES_PATH + 'data-as-object/data.js')
@@ -93,28 +121,4 @@ describe('~ handlebars partials', () => {
   })
 })
 
-describe('~ bitfinex libraries', () => {
-  it('compile all clients', async () => {
-    const input = require(EXAMPLES_PATH + 'bitfinex-clients/data.js')
 
-    const templatePath = path.join(EXAMPLES_PATH, 'bitfinex-clients/templates')
-
-    // delete folder if exists
-    await deleteFolder(path.join(EXAMPLES_PATH, 'bitfinex-clients/output'))
-
-    const outputPath = path.join(EXAMPLES_PATH, 'bitfinex-clients/output')
-
-    await generator(input, templatePath, outputPath)
-
-    // test if we can read the readme file
-    const readme = await read(path.join(EXAMPLES_PATH, 'bitfinex-clients/output/node/README.md'))
-
-    assert.ok(readme)
-
-    // test if we can read index.js file
-    const rest2 = await read(path.join(EXAMPLES_PATH, 'bitfinex-clients/output/node/lib/transports/rest2.js'))
-
-    // TODO: better testing regarding this generation
-    assert.equal(rest2.indexOf('{{'), -1)
-  })
-})

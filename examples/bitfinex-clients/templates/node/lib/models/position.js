@@ -1,36 +1,14 @@
 'use strict'
 
 const Model = require('../model')
-const BOOL_FIELDS = []
-const FIELDS = {
-  symbol: 0,
-  status: 1,
-  amount: 2,
-  basePrice: 3,
-  marginFunding: 4,
-  marginFundingType: 5,
-  pl: 6,
-  plPerc: 7,
-  liquidationPrice: 8,
-  leverage: 9
-}
+{{> node.models.fields (lookup node.models __FILENAME__) }}
 
-const FIELD_KEYS = Object.keys(FIELDS)
+{{> node.models.simple_class this }}
 
-class Position extends Model {
-  constructor (data = {}) {
-    super(data, FIELDS, BOOL_FIELDS, FIELD_KEYS)
-  }
-
-  static unserialize (arr) {
-    return super.unserialize(arr, FIELDS, BOOL_FIELDS, FIELD_KEYS)
-  }
-}
-
-Position.status = {}
+{{pascal_case __FILENAME__}}.status = {}
 const statuses = ['ACTIVE', 'CLOSED']
 statuses.forEach((s) => {
-  Position.status[s] = s
+  {{pascal_case __FILENAME__}}.status[s] = s
 })
 
-module.exports = Position
+module.exports = {{pascal_case __FILENAME__}}

@@ -1,0 +1,8 @@
+const BOOL_FIELDS = {{BOOL_FIELDS}}
+const FIELDS = {
+{{#each FIELDS}}
+  {{@key}}: {{this}}{{#unless @last}},{{/unless}}
+{{/each}}
+}
+
+const FIELD_KEYS = Object.keys(FIELDS)

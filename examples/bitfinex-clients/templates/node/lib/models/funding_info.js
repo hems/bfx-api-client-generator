@@ -3,14 +3,6 @@
 const Model = require('../model')
 
 // TODO: documentation isn't clear, check it on the wire
-class FundingInfo extends Model {
-  serialize () {
-    throw new Error('unimplemented')
-  }
+{{> node.models.simple_class this }}
 
-  static unserialize (arr) {
-    throw new Error('unimplemented')
-  }
-}
-
-module.exports = FundingInfo
+module.exports = {{pascal_case __FILENAME__}}
