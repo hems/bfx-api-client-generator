@@ -157,7 +157,7 @@ module Bitfinex
     class WSClient
       def initialize(options = {})
         # set some defaults
-        @url = options[:url] || 'wss://api.bitfinex.com/ws'
+        @url = options[:url] || '{{WS_URL}}'
         @reconnect = options[:reconnect] || false
         @reconnect_after = options[:reconnect_after] || 30
         @stop = false

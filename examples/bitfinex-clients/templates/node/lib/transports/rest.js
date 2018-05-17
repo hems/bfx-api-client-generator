@@ -4,7 +4,7 @@
 const request = require('request')
 const { genAuthSig, nonce } = require('../util')
 
-const API_URL = 'https://api.bitfinex.com'
+const API_URL = '{{API_URL}}'
 
 /**
  * Communicates with v1 of the Bitfinex HTTP API

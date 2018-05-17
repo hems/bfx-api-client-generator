@@ -6,7 +6,7 @@ const WebSocket = require('ws')
 
 const { isSnapshot, genAuthSig } = require('../util')
 
-const WS_URL = 'wss://api.bitfinex.com/ws/'
+const WS_URL = '{{WS_URL}}/'
 
 /**
  * Communicates with v1 of the Bitfinex WebSocket API

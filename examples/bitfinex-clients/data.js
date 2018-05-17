@@ -11,6 +11,7 @@ module.exports = new Promise(async (resolve) => {
     GITHUB_URL: 'https://github.com/bitfinexcom/bitfinex-api-node/',
 
     API_URL: 'https://api.bitfinex.com',
+    WS_URL : 'wss://api.bitfinex.com/ws',
 
     BASE_TIMEOUT: 15000,
 

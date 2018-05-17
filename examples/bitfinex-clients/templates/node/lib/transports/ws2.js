@@ -30,7 +30,7 @@ const {
   FundingTicker
 } = require('../models')
 
-const WS_URL = 'wss://api.bitfinex.com/ws/2'
+const WS_URL = '{{WS_URL}}/2'
 const MAX_CALC_OPS = 8
 const INFO_CODES = {
   SERVER_RESTART: 20051,

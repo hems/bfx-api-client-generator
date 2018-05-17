@@ -23,7 +23,7 @@ const {
 } = require('../models')
 
 const BASE_TIMEOUT = 15000
-const API_URL = 'https://api.bitfinex.com'
+const API_URL = '{{API_URL}}'
 
 /**
  * Communicates with v2 of the Bitfinex HTTP API

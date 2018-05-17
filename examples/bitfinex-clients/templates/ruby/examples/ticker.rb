@@ -5,7 +5,7 @@ require 'bitfinex-api-rb'
 Bitfinex::Client.configure do |conf|
   conf.api_key = ENV["BFX_KEY"]
   conf.secret  = ENV["BFX_SECRET"]
-  conf.websocket_api_endpoint = "wss://api.bitfinex.com/ws"
+  conf.websocket_api_endpoint = "{{WS_URL}}"
 end
 
 client = Bitfinex::Client.new

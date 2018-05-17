@@ -17,9 +17,9 @@ import (
 
 const (
 	// BaseURL is the v1 REST endpoint.
-	BaseURL = "https://api.bitfinex.com/v1/"
+	BaseURL = "{{API_URL}}/v1/"
 	// WebSocketURL the v1 Websocket endpoint.
-	WebSocketURL = "wss://api.bitfinex.com/ws/"
+	WebSocketURL = "{{WS_URL}}/"
 )
 
 // Client manages all the communication with the Bitfinex API.
