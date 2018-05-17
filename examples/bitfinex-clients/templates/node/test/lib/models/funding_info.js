@@ -1,7 +1,7 @@
 /* eslint-env mocha */
 'use strict'
 
-// const { FundingInfo } = require('../../../lib/models')
+// const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 // const testModel = require('../../helpers/test_model')
 
-describe.skip('FundingInfo model', () => {})
+describe.skip('{{pascal_case __FILENAME__}} model', () => {})

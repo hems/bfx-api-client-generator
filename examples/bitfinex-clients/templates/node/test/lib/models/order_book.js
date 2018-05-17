@@ -3,9 +3,9 @@
 
 const assert = require('assert')
 const CRC = require('crc-32')
-const { OrderBook } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 
-describe('OrderBook model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   it('constructor: integrates snapshot', () => {
     const entries = [
       [100, 2, 10],

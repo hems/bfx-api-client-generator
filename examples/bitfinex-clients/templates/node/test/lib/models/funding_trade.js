@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { FundingTrade } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('FundingTrade model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: FundingTrade,
+    model: {{pascal_case __FILENAME__}},
     orderedFields: [
       'id', 'symbol', 'mtsCreate', 'offerID', 'amount', 'rate', 'period',
       'maker'

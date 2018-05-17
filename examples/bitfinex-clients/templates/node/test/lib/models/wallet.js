@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { Wallet } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('Wallet model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: Wallet,
+    model: {{pascal_case __FILENAME__}},
     orderedFields: [
       'type', 'currency', 'balance', 'unsettledInterest', 'balanceAvailable'
     ]

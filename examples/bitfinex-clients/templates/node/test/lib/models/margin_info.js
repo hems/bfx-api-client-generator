@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { MarginInfo } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('MarginInfo model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: MarginInfo,
+    model: {{pascal_case __FILENAME__}},
     orderedFields: [
       'userPL', 'userSwaps', 'symbol', 'tradeableBalance', 'marginBalance',
       'marginNet'

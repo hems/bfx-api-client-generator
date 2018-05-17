@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { Position } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('Position model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: Position,
+    model: {{pascal_case __FILENAME__}},
     orderedFields: [
       'symbol', 'status', 'amount', 'basePrice', 'marginFunding',
       'marginFundingType', 'pl', 'plPerc', 'liquidationPrice', 'leverage'

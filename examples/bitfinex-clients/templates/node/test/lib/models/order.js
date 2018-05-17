@@ -2,13 +2,13 @@
 'use strict'
 
 const assert = require('assert')
-const { Order } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const WSv2 = require('../../../lib/transports/ws2')
 const testModel = require('../../helpers/test_model')
 
-describe('Order model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: Order,
+    model: {{pascal_case __FILENAME__}},
     boolFields: ['notify'],
     orderedFields: [
       'id', 'gid', 'cid', 'symbol', 'mtsCreate', 'mtsUpdate', 'amount',

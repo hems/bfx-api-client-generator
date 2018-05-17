@@ -36,8 +36,6 @@ describe('~ bitfinex libraries', () => {
   })
 })
 
-return
-
 describe('~ possible data inputs', () => {
   it('render data-as-object template', async () => {
     const input = require(EXAMPLES_PATH + 'data-as-object/data.js')

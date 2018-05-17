@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { TradingTicker } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('Trading Ticker model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: TradingTicker,
+    model: {{pascal_case __FILENAME__}},
     values: {
       symbol: 'tBTCUSD'
     },

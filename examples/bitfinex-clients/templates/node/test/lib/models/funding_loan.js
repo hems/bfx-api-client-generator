@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { FundingLoan } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('FundingLoan model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: FundingLoan,
+    model: {{pascal_case __FILENAME__}},
     boolFields: ['notify', 'hidden', 'renew', 'noClose'],
     orderedFields: [
       'id', 'symbol', 'side', 'mtsCreate', 'mtsUpdate', 'amount', 'flags',

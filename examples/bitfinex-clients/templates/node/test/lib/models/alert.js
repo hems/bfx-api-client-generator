@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { Alert } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('Alert model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: Alert,
+    model: {{pascal_case __FILENAME__}},
     orderedFields: ['key', 'type', 'symbol', 'price']
   })
 })

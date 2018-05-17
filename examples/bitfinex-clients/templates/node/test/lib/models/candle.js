@@ -1,12 +1,12 @@
 /* eslint-env mocha */
 'use strict'
 
-const { Candle } = require('../../../lib/models')
+const { {{pascal_case __FILENAME__}} } = require('../../../lib/models')
 const testModel = require('../../helpers/test_model')
 
-describe('Candle model', () => {
+describe('{{pascal_case __FILENAME__}} model', () => {
   testModel({
-    model: Candle,
+    model: {{pascal_case __FILENAME__}},
     orderedFields: ['mts', 'open', 'close', 'high', 'low', 'volume']
   })
 })
